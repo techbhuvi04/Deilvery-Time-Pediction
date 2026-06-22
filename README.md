@@ -15,9 +15,8 @@ Machine Learning pipeline for estimating food delivery duration using operationa
 #### Preprocessing and Modelling Pipeline
 
 
-```markdown
+
 ![Pipeline](complete_ML_pipeline.png)
-```
 
 ---
 
@@ -95,24 +94,22 @@ EDA was performed to understand:
 ### Delivery Time Distribution
 
 
-
-```markdown
 ![Distribution](distribution_del_time.png)
-```
+
 
 ### Relationship Between Features and Delivery Time
 
 
-```markdown
+
 ![Relationships](EDA2.png)
-```
+
 
 ### Correlation Analysis
 
 
-```markdown
+
 ![Heatmap](correlation_heatmap.png)
-```
+
 
 ---
 
@@ -131,9 +128,8 @@ The preprocessing pipeline included:
 ### Preprocessing Pipeline
 
 
-```markdown
 ![Pipeline](preprocessing_pipeline.png)
-```
+
 
 ---
 
@@ -174,25 +170,22 @@ Linear Regression consistently outperformed Decision Tree across all major evalu
 
 ## Model Comparison Dashboard
 
-```md
- error_matrix_comparison.png
-```
 
-```markdown
+ error_matrix_comparison.png
+
+
 ![Dashboard](R2_score_comparison.png)
-```
 
 ---
 
 # Actual vs Predicted Results
 
-```md
- LR(actual_vs_predicted).png
-```
 
-```markdown
+ LR(actual_vs_predicted).png
+
+
 ![Prediction](DT_actual_vs_predicted.png)
-```
+
 
 ---
 
