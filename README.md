@@ -94,7 +94,7 @@ EDA was performed to understand:
 ### Delivery Time Distribution
 
 
-![Distribution](distribution_del_time.png)
+![Distribution](destribution_del_time.png)
 
 
 ### Relationship Between Features and Delivery Time
@@ -128,7 +128,7 @@ The preprocessing pipeline included:
 ### Preprocessing Pipeline
 
 
-![Pipeline](preprocessing_pipeline.png)
+![Pipeline](data_preprocessing_pipeline.png)
 
 
 ---
@@ -181,7 +181,7 @@ Linear Regression consistently outperformed Decision Tree across all major evalu
 # Actual vs Predicted Results
 
 
- LR(actual_vs_predicted).png
+![Prediction](LR(actual_vs_predicted).png)
 
 
 ![Prediction](DT_actual_vs_predicted.png)
