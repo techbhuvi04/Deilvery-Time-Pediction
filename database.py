@@ -54,16 +54,37 @@ def save_prediction(
         ))
 
 
+# Fetch prediction history
+# ---------------- GET PREDICTION HISTORY ----------------
 def get_prediction_history(limit=20):
-    with sqlite3.connect(DB_PATH) as conn:
-        return pd.read_sql_query(
+    with sqlite3.connect("predictions.db") as connection:
+        cursor = connection.cursor()
+        cursor.execute(
             """
-            SELECT timestamp, distance, weather, traffic, time_of_day,
-                   vehicle, prep_time, experience, predicted_time
+            SELECT
+                timestamp,
+                distance,
+                weather,
+                traffic,
+                time_of_day,
+                vehicle,
+                prep_time,
+                experience,
+                predicted_time
             FROM predictions
             ORDER BY id DESC
             LIMIT ?
             """,
-            conn,
-            params=(limit,),
+            (int(limit),),
         )
+        rows = cursor.fetchall()
+        columns = [
+            description[0]
+            for description in cursor.description
+        ]
+
+    return pd.DataFrame(
+        rows,
+        columns=columns,
+        dtype=object,
+    )
