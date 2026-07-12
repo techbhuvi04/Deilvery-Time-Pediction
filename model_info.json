@@ -1,4 +1,5 @@
 {
+  "selected_model": "Linear Regression",
   "target_column": "Delivery_Time_min",
   "feature_columns": [
     "Distance_km",
@@ -20,49 +21,32 @@
     "Time_of_Day",
     "Vehicle_Type"
   ],
-  "removed_identifier_columns": [
-    "Order_ID"
-  ],
-  "train_rows": 800,
-  "test_rows": 200,
   "metrics": {
-    "linear_regression": {
-      "mae": 5.899168698353487,
-      "rmse": 8.826470149873376,
-      "mape_percent": 10.407452977801942,
-      "r2_score": 0.8261894538886113
+    "Linear Regression": {
+      "MAE": 6.063414905264768,
+      "RMSE": 8.952170614738877,
+      "MAPE (%)": 10.739810999204586,
+      "R2 Score": 0.8212036240893484
     },
-    "decision_tree_shallow": {
-      "mae": 8.773607093778315,
-      "rmse": 12.031627475295997,
-      "mape_percent": 17.53172979598574,
-      "r2_score": 0.677038492151666
+    "Decision Tree": {
+      "MAE": 8.773607093778315,
+      "RMSE": 12.031627475295997,
+      "MAPE (%)": 17.53172979598574,
+      "R2 Score": 0.677038492151666
     }
   },
   "cross_validation": {
     "Linear Regression": {
-      "CV MAE Mean": 6.548408989690766,
-      "CV MAE Std": 0.6747070411724696,
-      "CV R2 Mean": 0.7729126282900258,
-      "CV R2 Std": 0.04930463590134914
+      "CV MAE Mean": 6.600558696153075,
+      "CV MAE Std": 0.6250065650004574,
+      "CV R2 Mean": 0.7709802236518617,
+      "CV R2 Std": 0.047669840386116984
     },
     "Decision Tree": {
-      "CV MAE Mean": 9.223127806873096,
-      "CV MAE Std": 0.7055142343712706,
-      "CV R2 Mean": 0.6545895065924914,
-      "CV R2 Std": 0.04264702184935144
-    }
-  },
-  "order_id_experiment": {
-    "Linear Regression + Order_ID": {
-      "MAE": 5.913402004314552,
-      "RMSE": 8.855415469134991,
-      "R2 Score": 0.825047604216602
-    },
-    "Linear Regression without Order_ID": {
-      "MAE": 5.899168698353487,
-      "RMSE": 8.826470149873376,
-      "R2 Score": 0.8261894538886113
+      "CV MAE Mean": 9.246165236251628,
+      "CV MAE Std": 0.6817475080940697,
+      "CV R2 Mean": 0.6533015969057654,
+      "CV R2 Std": 0.04238784330439911
     }
   }
 }
