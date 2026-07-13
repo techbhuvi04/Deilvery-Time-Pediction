@@ -6,7 +6,7 @@ An ML-powered delivery time prediction system with **real-time traffic routing**
 
 ## 🎬 Demo
 
-![Demo Recording](images/demo_recording.mov)
+### Delievery Estimation [Check Live](https://myapp090803.streamlit.app/)
 
 > Run locally with `streamlit run app.py`
 
