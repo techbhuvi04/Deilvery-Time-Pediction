@@ -1,248 +1,265 @@
-# Delivery Time Estimation using Comparative Regression Analysis
+# 🍔 Delivery Intelligence Dashboard
 
-Machine Learning pipeline for estimating food delivery duration using operational and environmental features.
-
----
-
-## Project Highlights
-
-* The dataset was repeatedly shuffled and split into training and testing sets to ensure stable and reliable performance rather than relying on a single split.
-* Multiple regression algorithms were initially explored, and after extensive experimentation, **Linear Regression** and **Decision Tree Regression** emerged as the two strongest candidates for detailed evaluation.
-* The final system was built around these models and selected the best-performing approach based on multiple evaluation metrics and cross-validation.
+An ML-powered delivery time prediction system with **real-time traffic routing**, **live weather integration**, and an interactive **Streamlit dashboard**.
 
 ---
 
-#### Preprocessing and Modelling Pipeline
+## 🎬 Demo
 
+![Demo Recording](images/demo_recording.mov)
 
-
-![Pipeline](complete_ML_pipeline.png)
-
----
-
-## Problem Statement
-
-Accurate delivery time estimation is essential for improving customer experience and optimizing delivery operations.
-
-This project predicts food delivery duration using factors such as:
-
-* Distance travelled
-* Weather conditions
-* Traffic level
-* Time of day
-* Vehicle type
-* Preparation time
-* Courier experience
-
-The objective was not only to maximize prediction accuracy but also to understand **which operational factors contribute most to delivery delays**.
+> Run locally with `streamlit run app.py`
 
 ---
 
-# Workflow Overview
+## Application Screenshots
 
-```text
-Raw Dataset
-      ↓
-Exploratory Data Analysis
-      ↓
-Data Cleaning & Preprocessing
-      ↓
-Feature Engineering
-      ↓
-Model Experimentation
-      ↓
-Model Comparison
-      ↓
-Cross Validation
-      ↓
-Explainability Analysis
-      ↓
-Final Prediction Pipeline
+### Dashboard — Prediction & Route Map
+
+![Dashboard Prediction View](images/dashboard_prediction.jpeg)
+
+> Delivery from **Amritsari Vaishno Dhaba** to **NSUT, Dwarka** with predicted ETA of **33.5 min** (Medium Risk), along with the animated traffic-aware route on a dark-themed map.
+
+### Dashboard — Prediction Analytics
+
+![Dashboard Analytics View](images/dashboard_analytics.jpeg)
+
+> Expanded **Prediction Analytics** section showing historical ETA trends and a detailed prediction history table.
+
+---
+
+## How It Works
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                        USER INPUT                                │
+│  Restaurant Location · Customer Location · Vehicle · Experience  │
+└──────────────────────┬───────────────────────────────────────────┘
+                       │
+                       ▼
+         ┌─────────────────────────┐
+         │  Google Places API      │
+         │  Autocomplete + Coords  │
+         └────────────┬────────────┘
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+┌──────────────────┐   ┌──────────────────┐
+│ Google Routes API│   │ OpenWeatherMap   │
+│ Distance, ETA,   │   │ API              │
+│ Live Traffic,    │   │ Weather at       │
+│ Route Polyline   │   │ destination      │
+└────────┬─────────┘   └────────┬─────────┘
+         │                      │
+         ▼                      ▼
+┌──────────────────────────────────────────┐
+│         TRAFFIC CALCULATION              │
+│  live_time / static_time ratio:          │
+│  < 1.15 → Low    │ 1.15-1.35 → Medium   │
+│  1.35-1.60 → High│ > 1.60 → Very High   │
+└──────────────────┬───────────────────────┘
+                   │
+                   ▼
+┌──────────────────────────────────────────┐
+│         FEATURE VECTOR (7 features)      │
+│  Distance_km · Weather · Traffic_Level   │
+│  Time_of_Day · Vehicle_Type              │
+│  Preparation_Time_min                    │
+│  Courier_Experience_yrs                  │
+└──────────────────┬───────────────────────┘
+                   │
+                   ▼
+┌──────────────────────────────────────────┐
+│    🤖 LINEAR REGRESSION MODEL            │
+│    model.predict(features)               │
+└──────────────────┬───────────────────────┘
+                   │
+                   ▼
+┌──────────────────────────────────────────┐
+│         RISK CLASSIFICATION              │
+│  ≤ 30 min  → ✅ LOW (ON TIME)            │
+│  31-45 min → ⚠️ MEDIUM (AT RISK)        │
+│  > 45 min  → 🚨 HIGH (DELAYED)          │
+└──────────────────┬───────────────────────┘
+                   │
+        ┌──────────┼──────────┐
+        ▼          ▼          ▼
+   ┌─────────┐ ┌────────┐ ┌──────────┐
+   │ ETA     │ │Animated│ │ Save to  │
+   │ Card    │ │ Map    │ │ Database │
+   └─────────┘ └────────┘ └──────────┘
 ```
 
 ---
 
-# Dataset Overview
+## Features
 
-The dataset contains delivery-related operational variables and a target variable:
-
-### Target Variable
-
-* Delivery_Time_min
-
-### Input Features
-
-* Distance_km
-* Weather
-* Traffic_Level
-* Time_of_Day
-* Vehicle_Type
-* Preparation_Time_min
-* Courier_Experience_yrs
+| Feature | Description |
+|---------|-------------|
+| 🤖 **ML-Powered ETA** | Linear Regression model with R² = 0.82 |
+| 🗺️ **Animated Route Map** | Folium map with AntPath animation and pulsing rider marker |
+| 🚦 **Live Traffic** | Real-time traffic classification via Google Routes API |
+| 🌦️ **Weather Integration** | Auto-detects weather at delivery location |
+| 📍 **Place Autocomplete** | Google Places API with India region filtering |
+| ⚠️ **Risk Classification** | LOW / MEDIUM / HIGH risk assessment |
+| 📊 **Prediction Analytics** | Historical tracking with line charts |
+| 🎨 **Dark Mode UI** | Premium dark theme with glassmorphism |
+| 💾 **SQLite Persistence** | All predictions saved for analytics |
 
 ---
 
-## Exploratory Data Analysis
+## Tech Stack
 
-EDA was performed to understand:
-
-* feature distributions,
-* relationships with delivery time,
-* category frequencies,
-* possible trends and anomalies.
-
-### Delivery Time Distribution
-
-
-![Distribution](destribution_del_time.png)
-
-
-### Relationship Between Features and Delivery Time
-
-
-
-![Relationships](EDA2.png)
-
-
-### Correlation Analysis
-
-
-
-![Heatmap](correlation_heatmap.png)
-
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Streamlit |
+| **ML Model** | Scikit-Learn (Linear Regression) |
+| **Maps** | Folium + streamlit-folium + AntPath |
+| **Location API** | Google Places API + Google Routes API |
+| **Weather API** | OpenWeatherMap |
+| **Database** | SQLite3 |
+| **Data Processing** | Pandas, NumPy |
 
 ---
 
-# Data Preprocessing
+## Project Structure
 
-The preprocessing pipeline included:
-
-* removal of empty rows and columns,
-* handling missing values,
-* median imputation for numerical variables,
-* mode imputation for categorical variables,
-* one-hot encoding,
-* identifier removal (`Order_ID`),
-* train-test splitting.
-
-### Preprocessing Pipeline
-
-
-![Pipeline](data_preprocessing_pipeline.png)
-
-
----
-
-# Model Experimentation
-
-Several regression approaches were explored during experimentation.
-
-After multiple trials, the following two models consistently produced the best results:
-
-### Linear Regression
-
-Simple, interpretable and computationally efficient.
-
-### Decision Tree Regressor
-
-Capable of capturing nonlinear relationships and feature interactions.
-
----
-
-# Model Training Strategy
-
-Instead of relying on a single train-test split, the dataset was repeatedly randomized and evaluated to reduce split bias and improve reliability.
-
-Additionally, five-fold cross-validation was used to measure model stability.
-
----
-
-# Performance Comparison
-
-| Model             |   MAE |   RMSE |    MAPE | R² Score |
-| ----------------- | ----: | -----: | ------: | -------: |
-| Linear Regression | 5.899 |  8.826 | 10.407% |    0.826 |
-| Decision Tree     | 8.774 | 12.032 | 17.532% |    0.677 |
-
-Linear Regression consistently outperformed Decision Tree across all major evaluation metrics.
-
----
-
-## Model Comparison Dashboard
-
-
- error_matrix_comparison.png
-
-
-![Dashboard](R2_score_comparison.png)
-
----
-
-# Actual vs Predicted Results
-
-
-![Prediction](LR(actual_vs_predicted).png)
-
-
-![Prediction](DT_actual_vs_predicted.png)
-
-
----
-
-# Cross Validation Results
-
-| Model             | Mean CV MAE |
-| ----------------- | ----------: |
-| Linear Regression |       6.548 |
-| Decision Tree     |       9.223 |
-
-Cross-validation further confirmed that Linear Regression generalized better and produced more stable predictions.
-
----
-
-# Explainability Analysis
-
-Beyond prediction accuracy, the project focused on understanding the factors driving delivery delays.
-
-The strongest contributors were:
-
-* Distance travelled
-* Traffic level
-* Weather conditions
-* Preparation time
-
-# Key Findings
-
-* Linear Regression outperformed Decision Tree on all evaluation metrics.
-* Identifier columns negatively affected model quality.
-* Delivery distance and traffic conditions were the strongest delay drivers.
-* Simpler interpretable models performed better than more complex alternatives for this dataset.
-
----
-
-# Technologies Used
-
-Python • Pandas • NumPy • Scikit-Learn • Matplotlib • Google Colab
-
----
-
-# Future Improvements
-
-* Random Forest and Gradient Boosting models
-* Real-time API integration
-* Web dashboard for live prediction
-* Route optimization features
-
----
-
-## Repository Structure
-
-```text
-├── notebook.ipynb
-├── dataset.csv
-├── requirements.txt
+```
+zomato/
+├── app.py                    # Main Streamlit application
+├── requirements.txt          # Python dependencies
+├── .gitignore
 ├── README.md
+│
+├── model/
+│   ├── model.pkl             # Trained scikit-learn pipeline
+│   └── model_info.json       # Model metadata & metrics
+│
+├── notebooks/
+│   ├── food_delivery_time_prediction.ipynb
+│   └── food_delivery_time_pipeline.py
+│
 ├── images/
-├── model.pkl
-└── model_info.json
+│   ├── dashboard_prediction.jpeg
+│   ├── dashboard_analytics.jpeg
+│   └── demo_recording.mov
+│
+└── .streamlit/
+    └── secrets.toml          # API keys
 ```
+
+---
+
+## Setup & Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/techbhuvi04/Deilvery-Time-Pediction.git
+cd Deilvery-Time-Pediction
+```
+
+### 2. Create Virtual Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # macOS / Linux
+# .venv\Scripts\activate         # Windows
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure API Keys
+
+Create `.streamlit/secrets.toml`:
+
+```toml
+GOOGLE_MAPS_API_KEY = "your-google-maps-api-key"
+OPENWEATHER_API_KEY = "your-openweather-api-key"
+```
+
+> **Google Cloud APIs to enable:** Places API (New) + Routes API
+
+### 5. Run the Application
+
+```bash
+streamlit run app.py
+```
+
+Opens at `http://localhost:8501`
+
+---
+
+## Model Performance
+
+### Test Set Metrics
+
+| Metric | Linear Regression | Decision Tree |
+|--------|------------------:|--------------:|
+| **MAE** | 6.06 | 8.77 |
+| **RMSE** | 8.95 | 12.03 |
+| **MAPE** | 10.74% | 17.53% |
+| **R² Score** | **0.821** | 0.677 |
+
+### Cross-Validation (5-Fold)
+
+| Metric | Linear Regression | Decision Tree |
+|--------|------------------:|--------------:|
+| **CV MAE Mean** | 6.60 ± 0.63 | 9.25 ± 0.68 |
+| **CV R² Mean** | 0.771 ± 0.048 | 0.653 ± 0.042 |
+
+Linear Regression outperformed Decision Tree on **every metric**, making it the selected production model.
+
+---
+
+## Model Pipeline
+
+```
+Raw Dataset
+    │
+    ▼
+Exploratory Data Analysis
+    │
+    ▼
+Data Cleaning & Preprocessing
+  • Remove empty rows/columns
+  • Median imputation (numeric)
+  • Mode imputation (categorical)
+  • One-Hot Encoding
+    │
+    ▼
+Feature Engineering (7 features)
+  • 3 Numeric: Distance, Prep Time, Experience
+  • 4 Categorical: Weather, Traffic, Time, Vehicle
+    │
+    ▼
+Train/Test Split (repeated shuffling)
+    │
+    ├──► Linear Regression
+    ├──► Decision Tree Regressor
+    │
+    ▼
+5-Fold Cross Validation
+    │
+    ▼
+✅ Winner: Linear Regression (R² = 0.82)
+```
+
+---
+
+## Future Improvements
+
+- [ ] Ensemble models (Random Forest, XGBoost)
+- [ ] Real-time rider location tracking
+- [ ] Multi-stop delivery optimization
+- [ ] Streamlit Cloud deployment
+
+---
+
+<p align="center">
+  Built with ❤️ using Streamlit, Scikit-Learn, and Google Maps Platform
+</p>

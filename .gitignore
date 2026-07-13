@@ -1,0 +1,17 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime database
+predictions.db
+
+# API keys — DO NOT COMMIT
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db

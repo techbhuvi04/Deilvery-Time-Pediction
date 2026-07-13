@@ -23,9 +23,9 @@ st.set_page_config(layout="wide")
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
 def load_data():
-    with open("model.pkl", "rb") as file:
+    with open("model/model.pkl", "rb") as file:
         model = pickle.load(file)
-    with open("model_info.json", "r") as file:
+    with open("model/model_info.json", "r") as file:
         model_info = json.load(file)
     return model, model_info
 
