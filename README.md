@@ -1,10 +1,10 @@
-# 🍔 Delivery Intelligence Dashboard
+#  Delivery Intelligence Dashboard
 
 An ML-powered delivery time prediction system with **real-time traffic routing**, **live weather integration**, and an interactive **Streamlit dashboard**.
 
 ---
 
-## 🎬 Demo
+##  Demo
 
 ### Delievery Estimation [Check Live](https://myapp090803.streamlit.app/)
 
@@ -70,16 +70,16 @@ An ML-powered delivery time prediction system with **real-time traffic routing**
                    │
                    ▼
 ┌──────────────────────────────────────────┐
-│    🤖 LINEAR REGRESSION MODEL            │
+│     LINEAR REGRESSION MODEL            │
 │    model.predict(features)               │
 └──────────────────┬───────────────────────┘
                    │
                    ▼
 ┌──────────────────────────────────────────┐
 │         RISK CLASSIFICATION              │
-│  ≤ 30 min  → ✅ LOW (ON TIME)            │
-│  31-45 min → ⚠️ MEDIUM (AT RISK)        │
-│  > 45 min  → 🚨 HIGH (DELAYED)          │
+│  ≤ 30 min  →  LOW (ON TIME)            │
+│  31-45 min →  MEDIUM (AT RISK)        │
+│  > 45 min  →  HIGH (DELAYED)          │
 └──────────────────┬───────────────────────┘
                    │
         ┌──────────┼──────────┐
@@ -96,15 +96,15 @@ An ML-powered delivery time prediction system with **real-time traffic routing**
 
 | Feature | Description |
 |---------|-------------|
-| 🤖 **ML-Powered ETA** | Linear Regression model with R² = 0.82 |
-| 🗺️ **Animated Route Map** | Folium map with AntPath animation and pulsing rider marker |
-| 🚦 **Live Traffic** | Real-time traffic classification via Google Routes API |
-| 🌦️ **Weather Integration** | Auto-detects weather at delivery location |
-| 📍 **Place Autocomplete** | Google Places API with India region filtering |
-| ⚠️ **Risk Classification** | LOW / MEDIUM / HIGH risk assessment |
-| 📊 **Prediction Analytics** | Historical tracking with line charts |
-| 🎨 **Dark Mode UI** | Premium dark theme with glassmorphism |
-| 💾 **SQLite Persistence** | All predictions saved for analytics |
+|  **ML-Powered ETA** | Linear Regression model with R² = 0.82 |
+|  **Animated Route Map** | Folium map with AntPath animation and pulsing rider marker |
+|  **Live Traffic** | Real-time traffic classification via Google Routes API |
+|  **Weather Integration** | Auto-detects weather at delivery location |
+|  **Place Autocomplete** | Google Places API with India region filtering |
+|  **Risk Classification** | LOW / MEDIUM / HIGH risk assessment |
+|  **Prediction Analytics** | Historical tracking with line charts |
+|  **Dark Mode UI** | Premium dark theme with glassmorphism |
+|  **SQLite Persistence** | All predictions saved for analytics |
 
 ---
 
@@ -261,5 +261,5 @@ Train/Test Split (repeated shuffling)
 ---
 
 <p align="center">
-  Built with ❤️ using Streamlit, Scikit-Learn, and Google Maps Platform
+  Built with  using Streamlit, Scikit-Learn, and Google Maps Platform
 </p>
